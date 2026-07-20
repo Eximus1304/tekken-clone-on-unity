@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class DevilJinMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpHeight = 2f;
@@ -20,17 +20,17 @@ public class DevilJinMovement : MonoBehaviour
         Vector3 move = Vector3.zero;
 
         // Forward / Backward
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.J))
             move += transform.forward;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.L))
             move -= transform.forward;
 
         // Side Step
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.I))
             move += transform.right;      // Away from camera
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.K))
             move -= transform.right;      // Towards camera
 
         move.Normalize();
@@ -41,7 +41,7 @@ public class DevilJinMovement : MonoBehaviour
         {
             velocity.y = -2f;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.U))
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
