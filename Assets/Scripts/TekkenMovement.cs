@@ -1,14 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-public class DevilJinMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpHeight = 2f;
-    public float gravity = -20f;
 
     private CharacterController controller;
-    private Vector3 velocity;
 
     void Start()
     {
@@ -17,37 +13,35 @@ public class DevilJinMovement : MonoBehaviour
 
     void Update()
     {
-        Vector3 move = Vector3.zero;
+        Vector3 movement = Vector3.zero;
 
-        // Forward / Backward
-        if (Input.GetKey(KeyCode.D))
-            move += transform.forward;
-
-        if (Input.GetKey(KeyCode.A))
-            move -= transform.forward;
-
-        // Side Step
+        // W = Left
         if (Input.GetKey(KeyCode.W))
-            move += transform.right;      // Away from camera
-
-        if (Input.GetKey(KeyCode.S))
-            move -= transform.right;      // Towards camera
-
-        move.Normalize();
-
-        controller.Move(move * moveSpeed * Time.deltaTime);
-
-        if (controller.isGrounded)
         {
-            velocity.y = -2f;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
+            movement += Vector3.left;
         }
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        // S = Right
+        if (Input.GetKey(KeyCode.S))
+        {
+            movement += Vector3.right;
+        }
+
+        // D = Forward
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement += Vector3.forward;
+        }
+
+        // A = Backward
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement += Vector3.back;
+        }
+
+        // Prevent faster diagonal movement
+        movement = movement.normalized;
+
+        controller.Move(movement * moveSpeed * Time.deltaTime);
     }
 }
