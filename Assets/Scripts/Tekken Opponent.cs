@@ -15,23 +15,23 @@ public class OpponentMovement : MonoBehaviour
     {
         Vector3 movement = Vector3.zero;
 
-        // J = Forward
-        if (Input.GetKey(KeyCode.J))
-            movement += Vector3.back;
-
-        // L = Backward
-        if (Input.GetKey(KeyCode.L))
-            movement += Vector3.forward;
-
-        // I = Left
+        // Using else-if ensures only ONE input direction executes per frame
         if (Input.GetKey(KeyCode.I))
-            movement += Vector3.left;
-
-        // K = Right
-        if (Input.GetKey(KeyCode.K))
-            movement += Vector3.right;
-
-        movement = movement.normalized;
+        {
+            movement = Vector3.left;
+        }
+        else if (Input.GetKey(KeyCode.K))
+        {
+            movement = Vector3.right;
+        }
+        else if (Input.GetKey(KeyCode.L))
+        {
+            movement = Vector3.forward;
+        }
+        else if (Input.GetKey(KeyCode.J))
+        {
+            movement = Vector3.back;
+        }
 
         controller.Move(movement * moveSpeed * Time.deltaTime);
     }

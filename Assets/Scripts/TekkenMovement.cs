@@ -15,32 +15,23 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 movement = Vector3.zero;
 
-        // W = Left
+        // Using else-if ensures only ONE input direction executes per frame
         if (Input.GetKey(KeyCode.W))
         {
-            movement += Vector3.left;
+            movement = Vector3.left;
         }
-
-        // S = Right
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            movement += Vector3.right;
+            movement = Vector3.right;
         }
-
-        // D = Forward
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            movement += Vector3.forward;
+            movement = Vector3.forward;
         }
-
-        // A = Backward
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            movement += Vector3.back;
+            movement = Vector3.back;
         }
-
-        // Prevent faster diagonal movement
-        movement = movement.normalized;
 
         controller.Move(movement * moveSpeed * Time.deltaTime);
     }

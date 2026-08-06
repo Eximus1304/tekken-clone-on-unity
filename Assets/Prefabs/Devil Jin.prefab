@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81,9 +81,6 @@ PrefabInstance:
       addedObject: {fileID: 7830965416746715797}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9163559819319883419}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7052134382816576087}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       insertIndex: -1
@@ -91,6 +88,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9150891664695824782}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 464436764095381931}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 679350483919985886}
   m_SourcePrefab: {fileID: 100100000, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
 --- !u!1 &8521073792405238669 stripped
 GameObject:
@@ -122,19 +125,6 @@ CharacterController:
   m_SkinWidth: 0.11
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &9163559819319883419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8521073792405238669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0baa0d3a4aee6ad44842deb9715fb8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TekkenMovement
-  moveSpeed: 5
 --- !u!114 &7052134382816576087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,3 +183,29 @@ MonoBehaviour:
   kickDamage: 10
   comboDamage: 35
   specialDamage: 60
+--- !u!114 &464436764095381931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c1b9c189cee2744af42ebd6474b3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpponentMovement
+  moveSpeed: 5
+--- !u!114 &679350483919985886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4315a406c62e17040a68aed2637d9a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FaceOpponent
+  opponent: {fileID: 0}
