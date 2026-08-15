@@ -19,69 +19,118 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private GameObject p2Yakuza;
     [SerializeField] private GameObject p2Shaktimaan;
 
-    // Static character selection indices (-1 = unselected)
+    // Character IDs
+    // 0 = Devil Jin
+    // 1 = Yakuza
+    // 2 = Shaktimaan
+    // 3 = Modinho
     public static int player1Character = -1;
     public static int player2Character = -1;
 
     private void Start()
     {
-        // Reset values on start
         player1Character = -1;
         player2Character = -1;
 
-        // Ensure Player 1 screen is ACTIVE and Player 2 screen is INACTIVE at start
-        if (p1SelectPanel != null) p1SelectPanel.SetActive(true);
-        if (p2SelectPanel != null) p2SelectPanel.SetActive(false);
+        if (p1SelectPanel != null)
+            p1SelectPanel.SetActive(true);
 
-        // Hide all character previews initially
+        if (p2SelectPanel != null)
+            p2SelectPanel.SetActive(false);
+
         HideAllPreviews();
     }
 
-    // ---------- PLAYER 1 SELECTIONS ----------
+    // =========================
+    // PLAYER 1
+    // =========================
 
-    public void P1DevilJin() => SelectP1(0, p1Jin);
-    public void P1Yakuza() => SelectP1(1, p1Yakuza);
-    public void P1Shaktimaan() => SelectP1(2, p1Shaktimaan);
-    public void P1Modinho() => SelectP1(3, p1Modinho);
+    public void P1DevilJin()
+    {
+        SelectP1(0, p1Jin);
+    }
+
+    public void P1Yakuza()
+    {
+        SelectP1(1, p1Yakuza);
+    }
+
+    public void P1Shaktimaan()
+    {
+        SelectP1(2, p1Shaktimaan);
+    }
+
+    public void P1Modinho()
+    {
+        SelectP1(3, p1Modinho);
+    }
 
     private void SelectP1(int characterIndex, GameObject targetSprite)
     {
         player1Character = characterIndex;
-        Debug.Log($"P1 selected character index: {characterIndex}");
 
-        // Hide previous preview objects and activate the selected character's visual representation
+        Debug.Log("P1 selected character index: " + characterIndex);
+
         HideP1Previews();
-        if (targetSprite != null) targetSprite.SetActive(true);
 
-        // Automatically transition to Player 2's selection panel
+        if (targetSprite != null)
+            targetSprite.SetActive(true);
+
+        // Move from P1 selection to P2 selection
         TransitionToPlayer2();
     }
 
     private void TransitionToPlayer2()
     {
-        if (p1SelectPanel != null) p1SelectPanel.SetActive(false);
-        if (p2SelectPanel != null) p2SelectPanel.SetActive(true);
+        if (p1SelectPanel != null)
+            p1SelectPanel.SetActive(false);
+
+        if (p2SelectPanel != null)
+            p2SelectPanel.SetActive(true);
     }
 
-    // ---------- PLAYER 2 SELECTIONS ----------
+    // =========================
+    // PLAYER 2
+    // =========================
 
-    public void P2DevilJin() => SelectP2(0, p2Jin);
-    public void P2Yakuza() => SelectP2(1, p2Yakuza);
-    public void P2Shaktimaan() => SelectP2(2, p2Shaktimaan);
-    public void P2Modinho() => SelectP2(3, p2Modinho);
+    public void P2DevilJin()
+    {
+        SelectP2(0, p2Jin);
+    }
+
+    public void P2Yakuza()
+    {
+        SelectP2(1, p2Yakuza);
+    }
+
+    public void P2Shaktimaan()
+    {
+        SelectP2(2, p2Shaktimaan);
+    }
+
+    public void P2Modinho()
+    {
+        SelectP2(3, p2Modinho);
+    }
 
     private void SelectP2(int characterIndex, GameObject targetSprite)
     {
         player2Character = characterIndex;
-        Debug.Log($"P2 selected character index: {characterIndex}");
 
-        // Hide previous preview objects and activate the selected character's visual representation
+        Debug.Log("P2 selected character index: " + characterIndex);
+
         HideP2Previews();
-        if (targetSprite != null) targetSprite.SetActive(true);
 
-        // Load scene automatically once both choices are confirmed
-        ContinueToMapSelection();
+        if (targetSprite != null)
+            targetSprite.SetActive(true);
+
+        // DO NOT load MapSelection here.
+        // The Continue button will do that.
     }
+
+    // =========================
+    // CONTINUE BUTTON
+    // =========================
 
     public void ContinueToMapSelection()
     {
@@ -91,25 +140,45 @@ public class CharacterSelection : MonoBehaviour
             return;
         }
 
+        Debug.Log("P1 character: " + player1Character);
+        Debug.Log("P2 character: " + player2Character);
+        Debug.Log("Loading Map Selection...");
+
         SceneManager.LoadScene("MapSelection");
     }
 
-    // ---------- HELPER METHODS ----------
+    // =========================
+    // HELPERS
+    // =========================
 
     private void HideP1Previews()
     {
-        if (p1Jin != null) p1Jin.SetActive(false);
-        if (p1Modinho != null) p1Modinho.SetActive(false);
-        if (p1Yakuza != null) p1Yakuza.SetActive(false);
-        if (p1Shaktimaan != null) p1Shaktimaan.SetActive(false);
+        if (p1Jin != null)
+            p1Jin.SetActive(false);
+
+        if (p1Modinho != null)
+            p1Modinho.SetActive(false);
+
+        if (p1Yakuza != null)
+            p1Yakuza.SetActive(false);
+
+        if (p1Shaktimaan != null)
+            p1Shaktimaan.SetActive(false);
     }
 
     private void HideP2Previews()
     {
-        if (p2Jin != null) p2Jin.SetActive(false);
-        if (p2Modinho != null) p2Modinho.SetActive(false);
-        if (p2Yakuza != null) p2Yakuza.SetActive(false);
-        if (p2Shaktimaan != null) p2Shaktimaan.SetActive(false);
+        if (p2Jin != null)
+            p2Jin.SetActive(false);
+
+        if (p2Modinho != null)
+            p2Modinho.SetActive(false);
+
+        if (p2Yakuza != null)
+            p2Yakuza.SetActive(false);
+
+        if (p2Shaktimaan != null)
+            p2Shaktimaan.SetActive(false);
     }
 
     private void HideAllPreviews()

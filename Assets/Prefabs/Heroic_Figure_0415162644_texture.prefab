@@ -74,6 +74,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fde17e0928e88444dbcd96b919e0b4c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7980787791162003273}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fde17e0928e88444dbcd96b919e0b4c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2625675022914271932}
   m_SourcePrefab: {fileID: 100100000, guid: fde17e0928e88444dbcd96b919e0b4c5, type: 3}
 --- !u!1 &192786344857231825 stripped
 GameObject:
@@ -189,3 +192,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FaceOpponent
   opponent: {fileID: 0}
+--- !u!114 &2625675022914271932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192786344857231825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34eb0f6dfabf0ad4f8913bcaa966f8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  myHealth: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  punchDamage: 15
+  kickDamage: 10
+  comboDamage: 35
+  specialDamage: 60
+  contactDamage: 5
+  attackRange: 2
+  isPlayer1: 1
+  contactCooldown: 0.5

@@ -90,10 +90,22 @@ PrefabInstance:
       addedObject: {fileID: 9150891664695824782}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 464436764095381931}
+      addedObject: {fileID: 679350483919985886}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 679350483919985886}
+      addedObject: {fileID: -4275477941442851570}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2739437560209172653}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1058151448100688969}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -489558500851052388}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4792823660253712858}
   m_SourcePrefab: {fileID: 100100000, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
 --- !u!1 &8521073792405238669 stripped
 GameObject:
@@ -183,19 +195,6 @@ MonoBehaviour:
   kickDamage: 10
   comboDamage: 35
   specialDamage: 60
---- !u!114 &464436764095381931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8521073792405238669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c1b9c189cee2744af42ebd6474b3d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OpponentMovement
-  moveSpeed: 5
 --- !u!114 &679350483919985886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +208,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FaceOpponent
   opponent: {fileID: 0}
+--- !u!114 &-4275477941442851570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34eb0f6dfabf0ad4f8913bcaa966f8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  myHealth: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  punchDamage: 15
+  kickDamage: 10
+  comboDamage: 35
+  specialDamage: 60
+  attackRange: 2
+  isPlayer1: 1
+--- !u!114 &-2739437560209172653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baa0d3a4aee6ad44842deb9715fb8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveSpeed: 5
+--- !u!114 &-1058151448100688969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c1b9c189cee2744af42ebd6474b3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpponentMovement
+  moveSpeed: 5
+--- !u!114 &-489558500851052388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71877d00afbe62f478098d8023f34c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  myHealth: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  animator: {fileID: 0}
+  attackRange: 2
+  punchDamage: 15
+  kickDamage: 10
+  comboDamage: 35
+  specialDamage: 60
+--- !u!114 &4792823660253712858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521073792405238669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d0a62142317c74481b6968c57f2c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpponentAttack
+  myHealth: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  animator: {fileID: 0}
+  attackRange: 2
+  punchDamage: 15
+  kickDamage: 10
+  comboDamage: 35
+  specialDamage: 60

@@ -11,20 +11,37 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
+        UpdateHealthBar();
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        healthBar.value = currentHealth;
+        currentHealth = Mathf.Max(currentHealth, 0);
 
-        if (currentHealth <= 0)
+        UpdateHealthBar();
+
+        Debug.Log(
+            gameObject.name +
+            " took " +
+            damage +
+            " damage. Health: " +
+            currentHealth
+        );
+    }
+
+    void UpdateHealthBar()
+    {
+        if (healthBar == null)
         {
-            Debug.Log(gameObject.name + " KO!");
+            Debug.LogError(
+                gameObject.name + " has NO health bar!"
+            );
+            return;
         }
+
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
     }
 }

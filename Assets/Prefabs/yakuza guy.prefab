@@ -71,9 +71,6 @@ PrefabInstance:
       addedObject: {fileID: 6820533683631787530}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4546637065083584537}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4005261257210021570}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
@@ -81,6 +78,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4749267587897168412}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -43376186087141525}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6133005666620171454}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8200399693712536480}
     - targetCorrespondingSourceObject: {fileID: 8150033441646319692, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7152022888629186660}
@@ -115,19 +121,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4546637065083584537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691460831566519608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c1b9c189cee2744af42ebd6474b3d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player2Movement
-  moveSpeed: 5
 --- !u!114 &4005261257210021570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +179,52 @@ MonoBehaviour:
   kickDamage: 10
   comboDamage: 35
   specialDamage: 60
+--- !u!114 &-43376186087141525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691460831566519608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34eb0f6dfabf0ad4f8913bcaa966f8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  myHealth: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  punchDamage: 15
+  kickDamage: 10
+  comboDamage: 35
+  specialDamage: 60
+  attackRange: 2
+  isPlayer1: 1
+--- !u!114 &6133005666620171454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691460831566519608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c1b9c189cee2744af42ebd6474b3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpponentMovement
+  moveSpeed: 5
+--- !u!114 &-8200399693712536480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691460831566519608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baa0d3a4aee6ad44842deb9715fb8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveSpeed: 5
 --- !u!1 &8377638806424221733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8150033441646319692, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
