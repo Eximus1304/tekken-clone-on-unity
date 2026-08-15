@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OpponentAttack : MonoBehaviour
 {
@@ -16,6 +16,10 @@ public class OpponentAttack : MonoBehaviour
 
     void Update()
     {
+        // Make sure both health references exist
+        if (myHealth == null || enemyHealth == null)
+            return;
+
         // U + O = Combo
         if (Input.GetKey(KeyCode.U) && Input.GetKeyDown(KeyCode.O))
         {
@@ -30,8 +34,9 @@ public class OpponentAttack : MonoBehaviour
             Kick();
         }
 
-        // N = Special (only below 30 HP)
-        if (Input.GetKeyDown(KeyCode.N) && myHealth.currentHealth <= 30)
+        // N = Special (only when own HP <= 30)
+        if (Input.GetKeyDown(KeyCode.N) &&
+            myHealth.currentHealth <= 30)
         {
             SpecialMove();
         }
@@ -39,42 +44,62 @@ public class OpponentAttack : MonoBehaviour
 
     void Punch()
     {
-        //animator.SetTrigger("Punch");
+        if (animator != null)
+            animator.SetTrigger("Punch");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (InRange())
         {
             enemyHealth.TakeDamage(punchDamage);
+            Debug.Log("P2 Punch → " + punchDamage + " damage");
         }
     }
 
     void Kick()
     {
-        //animator.SetTrigger("Kick");
+        if (animator != null)
+            animator.SetTrigger("Kick");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (InRange())
         {
             enemyHealth.TakeDamage(kickDamage);
+            Debug.Log("P2 Kick → " + kickDamage + " damage");
         }
     }
 
     void Combo()
     {
-        //animator.SetTrigger("Combo");
+        if (animator != null)
+            animator.SetTrigger("Combo");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (InRange())
         {
             enemyHealth.TakeDamage(comboDamage);
+            Debug.Log("P2 Combo → " + comboDamage + " damage");
         }
     }
 
     void SpecialMove()
     {
-        //animator.SetTrigger("Special");
+        // Special animation will be added later
+        // animator.SetTrigger("Special");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (InRange())
         {
             enemyHealth.TakeDamage(specialDamage);
-            Debug.Log("SPECIAL MOVE!");
+            Debug.Log("P2 SPECIAL → " + specialDamage + " damage");
         }
+    }
+
+    bool InRange()
+    {
+        if (enemyHealth == null)
+            return false;
+
+        float distance = Vector3.Distance(
+            transform.position,
+            enemyHealth.transform.position
+        );
+
+        return distance <= attackRange;
     }
 }

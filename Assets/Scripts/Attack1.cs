@@ -31,7 +31,9 @@ public class PlayerAttack : MonoBehaviour
         }
 
         // X = Special (only below 30 HP)
-        if (Input.GetKeyDown(KeyCode.X) && myHealth.currentHealth <= 30)
+        if (Input.GetKeyDown(KeyCode.X) &&
+            myHealth != null &&
+            myHealth.currentHealth <= 30)
         {
             SpecialMove();
         }
@@ -39,33 +41,47 @@ public class PlayerAttack : MonoBehaviour
 
     void Punch()
     {
-        //animator.SetTrigger("Punch");
+        if (animator != null)
+            animator.SetTrigger("Punch");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (enemyHealth != null &&
+            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        {
             enemyHealth.TakeDamage(punchDamage);
+        }
     }
 
     void Kick()
     {
-        //animator.SetTrigger("Kick");
+        if (animator != null)
+            animator.SetTrigger("Kick");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (enemyHealth != null &&
+            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        {
             enemyHealth.TakeDamage(kickDamage);
+        }
     }
 
     void Combo()
     {
-        //animator.SetTrigger("Combo");
+        if (animator != null)
+            animator.SetTrigger("Combo");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (enemyHealth != null &&
+            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        {
             enemyHealth.TakeDamage(comboDamage);
+        }
     }
 
     void SpecialMove()
     {
-        //animator.SetTrigger("Special");
+        // Special animation will be added later
+        // animator.SetTrigger("Special");
 
-        if (Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (enemyHealth != null &&
+            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
         {
             enemyHealth.TakeDamage(specialDamage);
             Debug.Log("SPECIAL MOVE!");

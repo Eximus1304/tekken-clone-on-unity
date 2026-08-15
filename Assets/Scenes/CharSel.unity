@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: CONTINUE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2471,6 +2471,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab75bbaf9b91dd4e8da04be00015b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelection
+  p1SelectPanel: {fileID: 0}
+  p2SelectPanel: {fileID: 0}
+  p1Jin: {fileID: 0}
+  p1Modinho: {fileID: 0}
+  p1Yakuza: {fileID: 0}
+  p1Shaktimaan: {fileID: 0}
+  p2Jin: {fileID: 0}
+  p2Modinho: {fileID: 0}
+  p2Yakuza: {fileID: 0}
+  p2Shaktimaan: {fileID: 0}
 --- !u!4 &1888017641
 Transform:
   m_ObjectHideFlags: 0
@@ -2792,7 +2802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53, y: -583}
+  m_AnchoredPosition: {x: -7.36, y: -583}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2010469425

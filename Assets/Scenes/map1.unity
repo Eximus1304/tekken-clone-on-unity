@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   devilJinPrefab: {fileID: 8521073792405238669, guid: 59ee10fc604b7d74093be4b177493b80, type: 3}
   yakuzaPrefab: {fileID: 691460831566519608, guid: ab2a79c514e6585459fef46b92181a76, type: 3}
-  shaktimaanPrefab: {fileID: 192786344857231825, guid: f819b9713bf68e74a85d28db47c5a286, type: 3}
+  shaktimaanPrefab: {fileID: 919132149155446097, guid: cd0f1bfd5e11bad4a8fe00393c394ad4, type: 3}
   modinhoPrefab: {fileID: 2425702821839770152, guid: a4a6c159a0cd9874abd9b2ddc213dd9c, type: 3}
   p1Spawn: {fileID: 1780753433}
   p2Spawn: {fileID: 1505737977}

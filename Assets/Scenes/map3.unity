@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &95636097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3175711078049714465, guid: 4f299e97f01fb6348bd8717592f52a4c, type: 3}
+  m_PrefabInstance: {fileID: 920529940353722228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!65 &98806041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -479,6 +490,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &379838598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379838600}
+  - component: {fileID: 379838599}
+  m_Layer: 0
+  m_Name: SpnMngr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &379838599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379838598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4205f6b12d51d574ba479b9e4f14a8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawn
+  devilJinPrefab: {fileID: 8521073792405238669, guid: 59ee10fc604b7d74093be4b177493b80, type: 3}
+  yakuzaPrefab: {fileID: 691460831566519608, guid: ab2a79c514e6585459fef46b92181a76, type: 3}
+  shaktimaanPrefab: {fileID: 919132149155446097, guid: cd0f1bfd5e11bad4a8fe00393c394ad4, type: 3}
+  modinhoPrefab: {fileID: 0}
+  p1Spawn: {fileID: 780785124}
+  p2Spawn: {fileID: 1867731262}
+  p1HealthBar: {fileID: 95636097}
+  p2HealthBar: {fileID: 1257039903}
+--- !u!4 &379838600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379838598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8186, y: 0.03, z: -9.51643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453180196
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +888,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.06587049, y: 0.13092983, z: 0.013941683}
   m_Center: {x: 0.08772476, y: 0.10383506, z: 0.0069708405}
+--- !u!1 &780785123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780785124}
+  m_Layer: 0
+  m_Name: P1Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780785124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780785123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.82, y: 0.05, z: -4.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979790592
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +1051,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241544428}
   m_CullTransparentMesh: 1
+--- !u!114 &1257039903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1337813009946316598, guid: 4f299e97f01fb6348bd8717592f52a4c, type: 3}
+  m_PrefabInstance: {fileID: 920529940353722228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1392269758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1555,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.26802, y: 0.047400005, z: 0.0070200004}
   m_Center: {x: 0, y: -0.10519998, z: 0.0035099979}
+--- !u!1 &1867731261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1867731262}
+  m_Layer: 0
+  m_Name: P1Spawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1867731262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867731261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.57, y: 0.05, z: -14.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1924197602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1755,3 +1891,6 @@ SceneRoots:
   - {fileID: 358654315}
   - {fileID: 920529940353722228}
   - {fileID: 1542433259}
+  - {fileID: 780785124}
+  - {fileID: 1867731262}
+  - {fileID: 379838600}
