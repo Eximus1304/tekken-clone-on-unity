@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 81ad78c2939d7044da83e007f4c9ccd0, type: 2}
+      objectReference: {fileID: 9100000, guid: 1c49200acf7f62e428d44f9a6c0dd6d9, type: 2}
     - target: {fileID: 5866666021909216657, guid: 03064496944a9414fbfe8397ec1e17ad, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -189,7 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   myHealth: {fileID: 7052134382816576087}
   enemyHealth: {fileID: 0}
-  animator: {fileID: 0}
   attackRange: 2
   punchDamage: 15
   kickDamage: 10
@@ -268,7 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   myHealth: {fileID: 0}
   enemyHealth: {fileID: 0}
-  animator: {fileID: 0}
   attackRange: 2
   punchDamage: 15
   kickDamage: 10
@@ -288,7 +286,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OpponentAttack
   myHealth: {fileID: 0}
   enemyHealth: {fileID: 0}
-  animator: {fileID: 0}
   attackRange: 2
   punchDamage: 15
   kickDamage: 10

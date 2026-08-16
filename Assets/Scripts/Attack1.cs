@@ -1,11 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
     public Health myHealth;
     public Health enemyHealth;
-
-    public Animator animator;
 
     public float attackRange = 2f;
 
@@ -14,8 +12,18 @@ public class PlayerAttack : MonoBehaviour
     public int comboDamage = 35;
     public int specialDamage = 60;
 
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
     void Update()
     {
+        if (myHealth == null || enemyHealth == null)
+            return;
+
         // Q + E = Combo
         if (Input.GetKey(KeyCode.Q) && Input.GetKeyDown(KeyCode.E))
         {
@@ -30,9 +38,8 @@ public class PlayerAttack : MonoBehaviour
             Kick();
         }
 
-        // X = Special (only below 30 HP)
+        // X = Special
         if (Input.GetKeyDown(KeyCode.X) &&
-            myHealth != null &&
             myHealth.currentHealth <= 30)
         {
             SpecialMove();
@@ -41,50 +48,108 @@ public class PlayerAttack : MonoBehaviour
 
     void Punch()
     {
-        if (animator != null)
-            animator.SetTrigger("Punch");
+        PlayAnimation("Punch");
 
-        if (enemyHealth != null &&
-            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        float distance = GetDistance();
+
+        Debug.Log("P1 Punch | Distance = " + distance +
+                  " | Attack Range = " + attackRange);
+
+        if (distance <= attackRange)
         {
             enemyHealth.TakeDamage(punchDamage);
+
+            Debug.Log("P1 Punch HIT → -" +
+                      punchDamage + " HP");
+        }
+        else
+        {
+            Debug.Log("P1 Punch MISSED — too far away.");
         }
     }
 
     void Kick()
     {
-        if (animator != null)
-            animator.SetTrigger("Kick");
+        PlayAnimation("Kick");
 
-        if (enemyHealth != null &&
-            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        float distance = GetDistance();
+
+        Debug.Log("P1 Kick | Distance = " + distance +
+                  " | Attack Range = " + attackRange);
+
+        if (distance <= attackRange)
         {
             enemyHealth.TakeDamage(kickDamage);
+
+            Debug.Log("P1 Kick HIT → -" +
+                      kickDamage + " HP");
+        }
+        else
+        {
+            Debug.Log("P1 Kick MISSED — too far away.");
         }
     }
 
     void Combo()
     {
-        if (animator != null)
-            animator.SetTrigger("Combo");
+        PlayAnimation("Combo");
 
-        if (enemyHealth != null &&
-            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        float distance = GetDistance();
+
+        Debug.Log("P1 Combo | Distance = " + distance +
+                  " | Attack Range = " + attackRange);
+
+        if (distance <= attackRange)
         {
             enemyHealth.TakeDamage(comboDamage);
+
+            Debug.Log("P1 Combo HIT → -" +
+                      comboDamage + " HP");
+        }
+        else
+        {
+            Debug.Log("P1 Combo MISSED — too far away.");
         }
     }
 
     void SpecialMove()
     {
-        // Special animation will be added later
-        // animator.SetTrigger("Special");
+        float distance = GetDistance();
 
-        if (enemyHealth != null &&
-            Vector3.Distance(transform.position, enemyHealth.transform.position) <= attackRange)
+        if (distance <= attackRange)
         {
             enemyHealth.TakeDamage(specialDamage);
-            Debug.Log("SPECIAL MOVE!");
+
+            Debug.Log("P1 SPECIAL HIT → -" +
+                      specialDamage + " HP");
+        }
+    }
+
+    float GetDistance()
+    {
+        if (enemyHealth == null)
+            return 999f;
+
+        return Vector3.Distance(
+            transform.root.position,
+            enemyHealth.transform.root.position
+        );
+    }
+
+    void PlayAnimation(string animationName)
+    {
+        if (animator == null)
+            return;
+
+        foreach (AnimatorControllerParameter parameter
+                 in animator.parameters)
+        {
+            if (parameter.name == animationName &&
+                parameter.type == AnimatorControllerParameterType.Trigger)
+            {
+                animator.SetTrigger(animationName);
+                return;
+            }
         }
     }
 }
