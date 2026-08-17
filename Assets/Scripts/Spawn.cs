@@ -30,7 +30,6 @@ public class Spawn : MonoBehaviour
 
     void SpawnCharacters()
     {
-        // Get selected characters
         GameObject p1Prefab =
             GetCharacterPrefab(CharacterSelection.player1Character);
 
@@ -43,14 +42,16 @@ public class Spawn : MonoBehaviour
             return;
         }
 
-        // Spawn P1
+        // =========================
+        // SPAWN
+        // =========================
+
         p1 = Instantiate(
             p1Prefab,
             p1Spawn.position,
             p1Spawn.rotation
         );
 
-        // Spawn P2
         p2 = Instantiate(
             p2Prefab,
             p2Spawn.position,
@@ -67,19 +68,12 @@ public class Spawn : MonoBehaviour
         p1Health = p1.GetComponentInChildren<Health>(true);
         p2Health = p2.GetComponentInChildren<Health>(true);
 
-        if (p1Health == null)
+        if (p1Health == null || p2Health == null)
         {
-            Debug.LogError("P1 has no Health component!");
+            Debug.LogError("Health component missing!");
             return;
         }
 
-        if (p2Health == null)
-        {
-            Debug.LogError("P2 has no Health component!");
-            return;
-        }
-
-        // Connect health bars
         p1Health.healthBar = p1HealthBar;
         p2Health.healthBar = p2HealthBar;
 
@@ -99,88 +93,84 @@ public class Spawn : MonoBehaviour
         }
 
         // =========================
+        // P1 MOVEMENT
+        // =========================
+
+        PlayerMovement p1PlayerMovement =
+            p1.GetComponentInChildren<PlayerMovement>(true);
+
+        OpponentMovement p1OpponentMovement =
+            p1.GetComponentInChildren<OpponentMovement>(true);
+
+        if (p1PlayerMovement != null)
+            p1PlayerMovement.enabled = true;
+
+        if (p1OpponentMovement != null)
+            p1OpponentMovement.enabled = false;
+
+        // =========================
+        // P2 MOVEMENT
+        // =========================
+
+        PlayerMovement p2PlayerMovement =
+            p2.GetComponentInChildren<PlayerMovement>(true);
+
+        OpponentMovement p2OpponentMovement =
+            p2.GetComponentInChildren<OpponentMovement>(true);
+
+        if (p2PlayerMovement != null)
+            p2PlayerMovement.enabled = false;
+
+        if (p2OpponentMovement != null)
+            p2OpponentMovement.enabled = true;
+
+        // =========================
         // P1 ATTACK
         // =========================
 
         PlayerAttack p1Attack =
             p1.GetComponentInChildren<PlayerAttack>(true);
 
+        OpponentAttack p1OpponentAttack =
+            p1.GetComponentInChildren<OpponentAttack>(true);
+
         if (p1Attack != null)
         {
             p1Attack.myHealth = p1Health;
             p1Attack.enemyHealth = p2Health;
             p1Attack.enabled = true;
-
-            Debug.Log("P1 PlayerAttack connected.");
         }
-        else
+
+        if (p1OpponentAttack != null)
         {
-            Debug.LogError("P1 has no PlayerAttack!");
+            p1OpponentAttack.myHealth = p1Health;
+            p1OpponentAttack.enemyHealth = p2Health;
+            p1OpponentAttack.enabled = false;
         }
 
         // =========================
         // P2 ATTACK
         // =========================
 
-        OpponentAttack p2Attack =
+        PlayerAttack p2Attack =
+            p2.GetComponentInChildren<PlayerAttack>(true);
+
+        OpponentAttack p2OpponentAttack =
             p2.GetComponentInChildren<OpponentAttack>(true);
 
         if (p2Attack != null)
         {
             p2Attack.myHealth = p2Health;
             p2Attack.enemyHealth = p1Health;
-            p2Attack.enabled = true;
-
-            Debug.Log("P2 OpponentAttack connected.");
+            p2Attack.enabled = false;
         }
-        else
+
+        if (p2OpponentAttack != null)
         {
-            Debug.LogError("P2 has no OpponentAttack!");
+            p2OpponentAttack.myHealth = p2Health;
+            p2OpponentAttack.enemyHealth = p1Health;
+            p2OpponentAttack.enabled = true;
         }
-
-        // =========================
-        // P1 MOVEMENT
-        // =========================
-
-        PlayerMovement p1Movement =
-            p1.GetComponentInChildren<PlayerMovement>(true);
-
-        OpponentMovement p1Opponent =
-            p1.GetComponentInChildren<OpponentMovement>(true);
-
-        if (p1Movement != null)
-        {
-            p1Movement.enabled = true;
-        }
-
-        if (p1Opponent != null)
-        {
-            p1Opponent.enabled = false;
-        }
-
-        // =========================
-        // P2 MOVEMENT
-        // =========================
-
-        PlayerMovement p2Movement =
-            p2.GetComponentInChildren<PlayerMovement>(true);
-
-        OpponentMovement p2Opponent =
-            p2.GetComponentInChildren<OpponentMovement>(true);
-
-        if (p2Movement != null)
-        {
-            p2Movement.enabled = false;
-        }
-
-        if (p2Opponent != null)
-        {
-            p2Opponent.enabled = true;
-        }
-
-        // =========================
-        // DONE
-        // =========================
 
         Debug.Log("==============================");
         Debug.Log("FIGHT SETUP COMPLETE");
@@ -211,7 +201,6 @@ public class Spawn : MonoBehaviour
                 Debug.LogError(
                     "Invalid character index: " + characterIndex
                 );
-
                 return null;
         }
     }

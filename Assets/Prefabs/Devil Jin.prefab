@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f578d27dae8cbb34982f3a7e2e49fcf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  healthBar: {fileID: 0}
   maxHealth: 100
   currentHealth: 100
+  healthBar: {fileID: 0}
 --- !u!136 &6852718999487575177
 CapsuleCollider:
   m_ObjectHideFlags: 0

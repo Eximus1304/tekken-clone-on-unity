@@ -11,37 +11,52 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+
+        Debug.Log("PLAYER MOVEMENT STARTED: " + gameObject.name);
+
+        if (controller == null)
+            Debug.LogError("PlayerMovement: CharacterController NOT FOUND");
+
+        if (animator == null)
+            Debug.LogError("PlayerMovement: Animator NOT FOUND");
+        else
+            Debug.Log("PlayerMovement: Animator FOUND");
     }
 
     void Update()
     {
         Vector3 movement = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKey(KeyCode.W))
         {
             movement = Vector3.left;
-            animator.SetFloat("Move", 1f);
         }
-        else if (Input.GetKey(KeyCode.K))
+        else if (Input.GetKey(KeyCode.S))
         {
             movement = Vector3.right;
-            animator.SetFloat("Move", -1f);
         }
-        else if (Input.GetKey(KeyCode.L))
+        else if (Input.GetKey(KeyCode.D))
         {
             movement = Vector3.forward;
-            animator.SetFloat("Move", 0f);
         }
-        else if (Input.GetKey(KeyCode.J))
+        else if (Input.GetKey(KeyCode.A))
         {
             movement = Vector3.back;
-            animator.SetFloat("Move", 0f);
-        }
-        else
-        {
-            animator.SetFloat("Move", 0f);
         }
 
-        controller.Move(movement * moveSpeed * Time.deltaTime);
+        if (controller != null)
+        {
+            controller.Move(
+                movement * moveSpeed * Time.deltaTime
+            );
+        }
+
+        if (animator != null)
+        {
+            float moveValue =
+                movement.sqrMagnitude > 0.001f ? 1f : 0f;
+
+            animator.SetFloat("Move", moveValue);
+        }
     }
 }
