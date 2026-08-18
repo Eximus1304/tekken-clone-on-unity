@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OpponentMovement : MonoBehaviour
 {
@@ -12,15 +12,11 @@ public class OpponentMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
 
-        Debug.Log("OPPONENT MOVEMENT STARTED: " + gameObject.name);
-
         if (controller == null)
-            Debug.LogError("OpponentMovement: CharacterController NOT FOUND");
+            Debug.LogError("OpponentMovement: CharacterController not found on " + gameObject.name);
 
         if (animator == null)
-            Debug.LogError("OpponentMovement: Animator NOT FOUND");
-        else
-            Debug.Log("OpponentMovement: Animator FOUND");
+            Debug.LogError("OpponentMovement: Animator not found on " + gameObject.name);
     }
 
     void Update()
@@ -44,19 +40,35 @@ public class OpponentMovement : MonoBehaviour
             movement = Vector3.back;
         }
 
+        // Movement
         if (controller != null)
         {
-            controller.Move(
-                movement * moveSpeed * Time.deltaTime
-            );
+            controller.Move(movement * moveSpeed * Time.deltaTime);
         }
 
+        // Animation
         if (animator != null)
         {
-            float moveValue =
-                movement.sqrMagnitude > 0.001f ? 1f : 0f;
-
-            animator.SetFloat("Move", moveValue);
+            float moveValue = movement.magnitude > 0f ? 1f : 0f;
+            //Debug.Log("");
+            if (HasFloatParameter("Move"))
+            {
+                animator.SetFloat("Move", moveValue);
+            }
         }
+    }
+
+    bool HasFloatParameter(string parameterName)
+    {
+        foreach (AnimatorControllerParameter parameter in animator.parameters)
+        {
+            if (parameter.name == parameterName &&
+                parameter.type == AnimatorControllerParameterType.Float)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
