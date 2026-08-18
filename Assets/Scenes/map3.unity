@@ -527,6 +527,7 @@ MonoBehaviour:
   p2Spawn: {fileID: 1867731262}
   p1HealthBar: {fileID: 95636097}
   p2HealthBar: {fileID: 1257039903}
+  fightingCamera: {fileID: 1675653330}
 --- !u!4 &379838600
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,6 +1274,7 @@ GameObject:
   - component: {fileID: 1675653327}
   - component: {fileID: 1675653326}
   - component: {fileID: 1675653329}
+  - component: {fileID: 1675653330}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1398,6 +1400,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1675653330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675653325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681ebb0b89421a24d922c6542a5b02f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FightingCamera
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  baseDistance: 5
+  heightOffset: 2.25
+  pitchAngle: 10
+  smoothSpeed: 10
 --- !u!1 &1744271582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7181876485188374429, guid: ce8d33f7b77d6964896759a495027dd2, type: 3}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -13,10 +14,14 @@ public class PlayerAttack : MonoBehaviour
     public int specialDamage = 60;
 
     private Animator animator;
+    private bool isAttacking;
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+
+        if (animator == null)
+            Debug.LogError("P1: Animator not found!");
     }
 
     void Update()
@@ -24,132 +29,104 @@ public class PlayerAttack : MonoBehaviour
         if (myHealth == null || enemyHealth == null)
             return;
 
-        // Q + E = Combo
+        if (isAttacking)
+            return;
+
+        // Q + E = COMBO
         if (Input.GetKey(KeyCode.Q) && Input.GetKeyDown(KeyCode.E))
         {
-            Combo();
-        }
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Punch();
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Kick();
+            StartCoroutine(DoAttack("combo", comboDamage));
+            return;
         }
 
-        // X = Special
+        // Q = PUNCH
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            StartCoroutine(DoAttack("Punch", punchDamage));
+            return;
+        }
+
+        // E = KICK
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(DoAttack("kicking", kickDamage));
+            return;
+        }
+
+        // X = SPECIAL
         if (Input.GetKeyDown(KeyCode.X) &&
             myHealth.currentHealth <= 30)
         {
-            SpecialMove();
+            StartCoroutine(DoAttack("special", specialDamage));
         }
     }
 
-    void Punch()
-    {
-        PlayAnimation("Punch");
-
-        float distance = GetDistance();
-
-        Debug.Log("P1 Punch | Distance = " + distance +
-                  " | Attack Range = " + attackRange);
-
-        if (distance <= attackRange)
-        {
-            enemyHealth.TakeDamage(punchDamage);
-
-            Debug.Log("P1 Punch HIT → -" +
-                      punchDamage + " HP");
-        }
-        else
-        {
-            Debug.Log("P1 Punch MISSED — too far away.");
-        }
-    }
-
-    void Kick()
-    {
-        PlayAnimation("Kick");
-
-        float distance = GetDistance();
-
-        Debug.Log("P1 Kick | Distance = " + distance +
-                  " | Attack Range = " + attackRange);
-
-        if (distance <= attackRange)
-        {
-            enemyHealth.TakeDamage(kickDamage);
-
-            Debug.Log("P1 Kick HIT → -" +
-                      kickDamage + " HP");
-        }
-        else
-        {
-            Debug.Log("P1 Kick MISSED — too far away.");
-        }
-    }
-
-    void Combo()
-    {
-        PlayAnimation("Combo");
-
-        float distance = GetDistance();
-
-        Debug.Log("P1 Combo | Distance = " + distance +
-                  " | Attack Range = " + attackRange);
-
-        if (distance <= attackRange)
-        {
-            enemyHealth.TakeDamage(comboDamage);
-
-            Debug.Log("P1 Combo HIT → -" +
-                      comboDamage + " HP");
-        }
-        else
-        {
-            Debug.Log("P1 Combo MISSED — too far away.");
-        }
-    }
-
-    void SpecialMove()
-    {
-        float distance = GetDistance();
-
-        if (distance <= attackRange)
-        {
-            enemyHealth.TakeDamage(specialDamage);
-
-            Debug.Log("P1 SPECIAL HIT → -" +
-                      specialDamage + " HP");
-        }
-    }
-
-    float GetDistance()
-    {
-        if (enemyHealth == null)
-            return 999f;
-
-        return Vector3.Distance(
-            transform.root.position,
-            enemyHealth.transform.root.position
-        );
-    }
-
-    void PlayAnimation(string animationName)
+    IEnumerator DoAttack(string animationName, int damage)
     {
         if (animator == null)
-            return;
+            yield break;
 
-        foreach (AnimatorControllerParameter parameter
-                 in animator.parameters)
+        isAttacking = true;
+
+        Debug.Log("P1 PLAYING: " + animationName);
+
+        // DIRECTLY PLAY THE EXACT ANIMATOR STATE
+        animator.Play(animationName, 0, 0f);
+
+        // Wait one frame so Animator enters the state
+        yield return null;
+
+        // Damage
+        if (InRange())
         {
-            if (parameter.name == animationName &&
-                parameter.type == AnimatorControllerParameterType.Trigger)
-            {
-                animator.SetTrigger(animationName);
-                return;
-            }
+            enemyHealth.TakeDamage(damage);
+
+            Debug.Log(
+                "P1 HIT: " +
+                animationName +
+                " -> -" +
+                damage
+            );
         }
+        else
+        {
+            Debug.Log("P1 ATTACK MISSED");
+        }
+
+        // Wait for current animation
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        float duration = state.length;
+
+        if (duration < 0.1f)
+            duration = 0.5f;
+
+        yield return new WaitForSeconds(duration);
+
+        // Return to Idle
+        animator.Play("Idle", 0, 0f);
+
+        isAttacking = false;
+    }
+
+    bool InRange()
+    {
+        if (enemyHealth == null)
+            return false;
+
+        float distance = Vector3.Distance(
+            transform.position,
+            enemyHealth.transform.position
+        );
+
+        Debug.Log(
+            "P1 Distance = " +
+            distance +
+            " | Range = " +
+            attackRange
+        );
+
+        return distance <= attackRange;
     }
 }

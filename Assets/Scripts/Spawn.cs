@@ -17,6 +17,9 @@ public class Spawn : MonoBehaviour
     public Slider p1HealthBar;
     public Slider p2HealthBar;
 
+    [Header("Camera & Tracking")]
+    public FightingCamera fightingCamera;
+
     private GameObject p1;
     private GameObject p2;
 
@@ -30,11 +33,8 @@ public class Spawn : MonoBehaviour
 
     void SpawnCharacters()
     {
-        GameObject p1Prefab =
-            GetCharacterPrefab(CharacterSelection.player1Character);
-
-        GameObject p2Prefab =
-            GetCharacterPrefab(CharacterSelection.player2Character);
+        GameObject p1Prefab = GetCharacterPrefab(CharacterSelection.player1Character);
+        GameObject p2Prefab = GetCharacterPrefab(CharacterSelection.player2Character);
 
         if (p1Prefab == null || p2Prefab == null)
         {
@@ -46,20 +46,35 @@ public class Spawn : MonoBehaviour
         // SPAWN
         // =========================
 
-        p1 = Instantiate(
-            p1Prefab,
-            p1Spawn.position,
-            p1Spawn.rotation
-        );
-
-        p2 = Instantiate(
-            p2Prefab,
-            p2Spawn.position,
-            p2Spawn.rotation
-        );
+        p1 = Instantiate(p1Prefab, p1Spawn.position, p1Spawn.rotation);
+        p2 = Instantiate(p2Prefab, p2Spawn.position, p2Spawn.rotation);
 
         Debug.Log("P1 spawned: " + p1.name);
         Debug.Log("P2 spawned: " + p2.name);
+
+        // =========================
+        // CAMERA TRACKING SETUP
+        // =========================
+
+        if (fightingCamera == null)
+        {
+            fightingCamera = Camera.main.GetComponent<FightingCamera>();
+        }
+
+        if (fightingCamera != null)
+        {
+            fightingCamera.SetTargets(p1.transform, p2.transform);
+        }
+
+        // =========================
+        // AUTO-FACE OPPONENT SETUP
+        // =========================
+
+        FaceOpponent p1Face = p1.GetComponentInChildren<FaceOpponent>(true);
+        FaceOpponent p2Face = p2.GetComponentInChildren<FaceOpponent>(true);
+
+        if (p1Face != null) p1Face.opponent = p2.transform;
+        if (p2Face != null) p2Face.opponent = p1.transform;
 
         // =========================
         // HEALTH
@@ -96,43 +111,28 @@ public class Spawn : MonoBehaviour
         // P1 MOVEMENT
         // =========================
 
-        PlayerMovement p1PlayerMovement =
-            p1.GetComponentInChildren<PlayerMovement>(true);
+        PlayerMovement p1PlayerMovement = p1.GetComponentInChildren<PlayerMovement>(true);
+        OpponentMovement p1OpponentMovement = p1.GetComponentInChildren<OpponentMovement>(true);
 
-        OpponentMovement p1OpponentMovement =
-            p1.GetComponentInChildren<OpponentMovement>(true);
-
-        if (p1PlayerMovement != null)
-            p1PlayerMovement.enabled = true;
-
-        if (p1OpponentMovement != null)
-            p1OpponentMovement.enabled = false;
+        if (p1PlayerMovement != null) p1PlayerMovement.enabled = true;
+        if (p1OpponentMovement != null) p1OpponentMovement.enabled = false;
 
         // =========================
         // P2 MOVEMENT
         // =========================
 
-        PlayerMovement p2PlayerMovement =
-            p2.GetComponentInChildren<PlayerMovement>(true);
+        PlayerMovement p2PlayerMovement = p2.GetComponentInChildren<PlayerMovement>(true);
+        OpponentMovement p2OpponentMovement = p2.GetComponentInChildren<OpponentMovement>(true);
 
-        OpponentMovement p2OpponentMovement =
-            p2.GetComponentInChildren<OpponentMovement>(true);
-
-        if (p2PlayerMovement != null)
-            p2PlayerMovement.enabled = false;
-
-        if (p2OpponentMovement != null)
-            p2OpponentMovement.enabled = true;
+        if (p2PlayerMovement != null) p2PlayerMovement.enabled = false;
+        if (p2OpponentMovement != null) p2OpponentMovement.enabled = true;
 
         // =========================
         // P1 ATTACK
         // =========================
 
-        PlayerAttack p1Attack =
-            p1.GetComponentInChildren<PlayerAttack>(true);
-
-        OpponentAttack p1OpponentAttack =
-            p1.GetComponentInChildren<OpponentAttack>(true);
+        PlayerAttack p1Attack = p1.GetComponentInChildren<PlayerAttack>(true);
+        OpponentAttack p1OpponentAttack = p1.GetComponentInChildren<OpponentAttack>(true);
 
         if (p1Attack != null)
         {
@@ -152,11 +152,8 @@ public class Spawn : MonoBehaviour
         // P2 ATTACK
         // =========================
 
-        PlayerAttack p2Attack =
-            p2.GetComponentInChildren<PlayerAttack>(true);
-
-        OpponentAttack p2OpponentAttack =
-            p2.GetComponentInChildren<OpponentAttack>(true);
+        PlayerAttack p2Attack = p2.GetComponentInChildren<PlayerAttack>(true);
+        OpponentAttack p2OpponentAttack = p2.GetComponentInChildren<OpponentAttack>(true);
 
         if (p2Attack != null)
         {
@@ -176,8 +173,6 @@ public class Spawn : MonoBehaviour
         Debug.Log("FIGHT SETUP COMPLETE");
         Debug.Log("P1 = " + p1.name);
         Debug.Log("P2 = " + p2.name);
-        Debug.Log("P1 HP = " + p1Health.currentHealth);
-        Debug.Log("P2 HP = " + p2Health.currentHealth);
         Debug.Log("==============================");
     }
 
@@ -198,9 +193,7 @@ public class Spawn : MonoBehaviour
                 return modinhoPrefab;
 
             default:
-                Debug.LogError(
-                    "Invalid character index: " + characterIndex
-                );
+                Debug.LogError("Invalid character index: " + characterIndex);
                 return null;
         }
     }

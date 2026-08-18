@@ -11,8 +11,18 @@ public class FightingCamera : MonoBehaviour
     public float pitchAngle = 10f;
     public float smoothSpeed = 10f;
 
+    /// <summary>
+    /// Call this method from your spawn/selection manager after instantiating Player 1 and Player 2.
+    /// </summary>
+    public void SetTargets(Transform p1, Transform p2)
+    {
+        player1 = p1;
+        player2 = p2;
+    }
+
     void LateUpdate()
     {
+        // Wait until both characters are spawned and assigned
         if (player1 == null || player2 == null) return;
 
         // Find center between fighters
@@ -35,7 +45,7 @@ public class FightingCamera : MonoBehaviour
         Vector3 targetPosition = midpoint + offset;
         targetPosition.y = midpoint.y + heightOffset;
 
-        // Instantly snap in Editor frame, lerp during Play
+        // Smoothly interpolate position and rotation
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothSpeed);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
     }

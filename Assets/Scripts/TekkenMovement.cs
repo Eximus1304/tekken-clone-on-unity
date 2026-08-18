@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,51 +12,69 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
 
-        Debug.Log("PLAYER MOVEMENT STARTED: " + gameObject.name);
-
         if (controller == null)
-            Debug.LogError("PlayerMovement: CharacterController NOT FOUND");
+            Debug.LogError("P1: CharacterController not found!");
 
         if (animator == null)
-            Debug.LogError("PlayerMovement: Animator NOT FOUND");
-        else
-            Debug.Log("PlayerMovement: Animator FOUND");
+            Debug.LogError("P1: Animator not found!");
     }
 
     void Update()
     {
+        if (controller == null)
+            return;
+
         Vector3 movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
-        {
-            movement = Vector3.left;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            movement = Vector3.right;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            movement = Vector3.forward;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            movement = Vector3.back;
-        }
+            movement += Vector3.forward;
 
-        if (controller != null)
-        {
-            controller.Move(
-                movement * moveSpeed * Time.deltaTime
-            );
-        }
+        if (Input.GetKey(KeyCode.S))
+            movement += Vector3.back;
 
-        if (animator != null)
-        {
-            float moveValue =
-                movement.sqrMagnitude > 0.001f ? 1f : 0f;
+        if (Input.GetKey(KeyCode.A))
+            movement += Vector3.left;
 
-            animator.SetFloat("Move", moveValue);
+        if (Input.GetKey(KeyCode.D))
+            movement += Vector3.right;
+
+        if (movement.magnitude > 1f)
+            movement.Normalize();
+
+        controller.Move(
+            movement * moveSpeed * Time.deltaTime
+        );
+
+        UpdateAnimation(movement);
+    }
+
+    void UpdateAnimation(Vector3 movement)
+    {
+        if (animator == null)
+            return;
+
+        // NEVER overwrite an attack
+        if (IsAttackAnimation())
+            return;
+
+        if (movement.magnitude > 0.01f)
+        {
+            animator.Play("fast run");
         }
+        else
+        {
+            animator.Play("Idle");
+        }
+    }
+
+    bool IsAttackAnimation()
+    {
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
+
+        return state.IsName("Punch") ||
+               state.IsName("kicking") ||
+               state.IsName("combo") ||
+               state.IsName("special");
     }
 }

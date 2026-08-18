@@ -13,62 +13,68 @@ public class OpponentMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         if (controller == null)
-            Debug.LogError("OpponentMovement: CharacterController not found on " + gameObject.name);
+            Debug.LogError("P2: CharacterController not found!");
 
         if (animator == null)
-            Debug.LogError("OpponentMovement: Animator not found on " + gameObject.name);
+            Debug.LogError("P2: Animator not found!");
     }
 
     void Update()
     {
+        if (controller == null)
+            return;
+
         Vector3 movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.I))
-        {
-            movement = Vector3.left;
-        }
-        else if (Input.GetKey(KeyCode.K))
-        {
-            movement = Vector3.right;
-        }
-        else if (Input.GetKey(KeyCode.L))
-        {
-            movement = Vector3.forward;
-        }
-        else if (Input.GetKey(KeyCode.J))
-        {
-            movement = Vector3.back;
-        }
+            movement += Vector3.forward;
 
-        // Movement
-        if (controller != null)
-        {
-            controller.Move(movement * moveSpeed * Time.deltaTime);
-        }
+        if (Input.GetKey(KeyCode.K))
+            movement += Vector3.back;
 
-        // Animation
-        if (animator != null)
+        if (Input.GetKey(KeyCode.J))
+            movement += Vector3.left;
+
+        if (Input.GetKey(KeyCode.L))
+            movement += Vector3.right;
+
+        if (movement.magnitude > 1f)
+            movement.Normalize();
+
+        controller.Move(
+            movement * moveSpeed * Time.deltaTime
+        );
+
+        UpdateAnimation(movement);
+    }
+
+    void UpdateAnimation(Vector3 movement)
+    {
+        if (animator == null)
+            return;
+
+        // NEVER overwrite an attack
+        if (IsAttackAnimation())
+            return;
+
+        if (movement.magnitude > 0.01f)
         {
-            float moveValue = movement.magnitude > 0f ? 1f : 0f;
-            //Debug.Log("");
-            if (HasFloatParameter("Move"))
-            {
-                animator.SetFloat("Move", moveValue);
-            }
+            animator.Play("fast run");
+        }
+        else
+        {
+            animator.Play("Idle");
         }
     }
 
-    bool HasFloatParameter(string parameterName)
+    bool IsAttackAnimation()
     {
-        foreach (AnimatorControllerParameter parameter in animator.parameters)
-        {
-            if (parameter.name == parameterName &&
-                parameter.type == AnimatorControllerParameterType.Float)
-            {
-                return true;
-            }
-        }
+        AnimatorStateInfo state =
+            animator.GetCurrentAnimatorStateInfo(0);
 
-        return false;
+        return state.IsName("Punch") ||
+               state.IsName("kicking") ||
+               state.IsName("combo") ||
+               state.IsName("special");
     }
 }

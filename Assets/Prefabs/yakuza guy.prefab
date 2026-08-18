@@ -87,6 +87,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8200399693712536480}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6850581323920267840}
     - targetCorrespondingSourceObject: {fileID: 8150033441646319692, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7152022888629186660}
@@ -133,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f578d27dae8cbb34982f3a7e2e49fcf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  healthBar: {fileID: 0}
   maxHealth: 100
   currentHealth: 100
+  healthBar: {fileID: 0}
 --- !u!136 &9002988618494096317
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -224,6 +227,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
+--- !u!114 &6850581323920267840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691460831566519608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4315a406c62e17040a68aed2637d9a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FaceOpponent
+  opponent: {fileID: 0}
 --- !u!1 &8377638806424221733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8150033441646319692, guid: 5c3306189c5a6344db7883160cbe688f, type: 3}

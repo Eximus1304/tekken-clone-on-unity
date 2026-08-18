@@ -19,4 +19,11 @@ public class FaceOpponent : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
     }
+    private void LateUpdate()
+    {
+        if (opponent != null)
+        {
+            Debug.Log(gameObject.name + " is targeting " + opponent.name);
+        }
+    }
 }
